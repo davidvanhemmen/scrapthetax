@@ -632,12 +632,16 @@ function removeArticle(id) {
 // ═══════════════════════════════════════════════
 // POSTAL CODE LOOKUP & LETTER
 // ═══════════════════════════════════════════════
+let _postalTimeout = null;
 function onPostalInput(el) {
   let v = el.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
   if (v.length > 3) v = v.slice(0,3) + ' ' + v.slice(3);
   el.value = v;
-  // Auto-lookup when 6+ chars entered
-  if (v.replace(/\s/g,'').length >= 6) lookupPostalCode();
+  // Auto-lookup when 6+ chars entered, with debounce
+  clearTimeout(_postalTimeout);
+  if (v.replace(/\s/g,'').length >= 6) {
+    _postalTimeout = setTimeout(() => lookupPostalCode(), 500);
+  }
 }
 
 function showPostalStatus(html, type) {
@@ -651,6 +655,7 @@ function lookupPostalCode() {
   const raw = document.getElementById('l-postal').value.replace(/\s/g, '').toUpperCase();
   if (raw.length < 6) { showPostalStatus('Please enter a full postal code (e.g. V5K 0A1).', 'error'); return; }
   if (!/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(raw)) { showPostalStatus('Invalid postal code format. Use format like V5K 0A1.', 'error'); return; }
+  if (raw[0] !== 'V') { showPostalStatus('This doesn\'t appear to be a British Columbia postal code (BC codes start with V).', 'error'); return; }
 
   showPostalStatus('<span style="display:inline-block;width:16px;height:16px;border:2px solid #6B7280;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite"></span> Looking up your riding...', 'loading');
   document.getElementById('l-lookup-btn').disabled = true;
@@ -663,57 +668,108 @@ function lookupPostalCode() {
     document.head.appendChild(s);
   }
 
+  // Step 1: Geocode postal code to lat/lng using Nominatim (OpenStreetMap)
+  const formatted = raw.slice(0,3) + ' ' + raw.slice(3);
+  fetch(`https://nominatim.openstreetmap.org/search?postalcode=${formatted}&country=Canada&format=json&limit=1`, {
+    headers: { 'Accept': 'application/json' }
+  })
+    .then(r => r.json())
+    .then(geo => {
+      if (!geo || !geo.length || !geo[0].lat || !geo[0].lon) {
+        throw new Error('geocode_failed');
+      }
+      const lat = parseFloat(geo[0].lat);
+      const lon = parseFloat(geo[0].lon);
+
+      // Step 2: Query Represent API for 2023 redistribution boundaries at these coordinates
+      return fetch(`https://represent.opennorth.ca/boundaries/british-columbia-electoral-districts-2023-redistribution/?contains=${lat},${lon}&format=json`);
+    })
+    .then(r => {
+      if (!r.ok) throw new Error('represent_failed');
+      return r.json();
+    })
+    .then(data => {
+      document.getElementById('l-lookup-btn').disabled = false;
+      const objects = data.objects || [];
+      if (!objects.length) {
+        // Fallback: try the generic postcode endpoint
+        return fallbackPostcodeLookup(raw);
+      }
+
+      const ridingName = objects[0].name;
+      matchRidingToMLA(ridingName, raw);
+    })
+    .catch(err => {
+      document.getElementById('l-lookup-btn').disabled = false;
+      if (err.message === 'geocode_failed') {
+        // Fallback: try Represent postal code endpoint directly
+        fallbackPostcodeLookup(raw);
+      } else {
+        showPostalStatus('Could not look up this postal code. Check your connection or <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">search manually</button>.', 'error');
+      }
+    });
+}
+
+function fallbackPostcodeLookup(raw) {
+  // Fallback: use Represent postal code endpoint and look for any BC boundaries
   fetch(`https://represent.opennorth.ca/postcodes/${raw}/?format=json`)
     .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
     .then(data => {
       document.getElementById('l-lookup-btn').disabled = false;
-      // Find BC provincial riding from boundaries_centroid or boundaries_concordance
       let ridingName = null;
-      const bcSet = 'british-columbia-electoral-districts';
       const allBoundaries = [...(data.boundaries_centroid || []), ...(data.boundaries_concordance || [])];
       for (const b of allBoundaries) {
-        if (b.boundary_set_name && b.boundary_set_name.toLowerCase().includes('british columbia electoral district')) {
-          ridingName = b.name; break;
-        }
-        if (b.url && b.url.includes(bcSet)) {
-          ridingName = b.name; break;
-        }
+        // Prefer 2023 redistribution
+        if (b.url && b.url.includes('2023-redistribution')) { ridingName = b.name; break; }
       }
+      // Fall back to any BC boundary
       if (!ridingName) {
-        // Fallback: check if province is BC and try harder
-        if (data.province && data.province !== 'BC') {
-          showPostalStatus('This postal code is outside British Columbia. Please enter a B.C. postal code.', 'error');
-        } else {
-          showPostalStatus('Could not determine the riding for this postal code. Try a nearby postal code or <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">search manually</button>.', 'error');
+        for (const b of allBoundaries) {
+          if (b.boundary_set_name && b.boundary_set_name.toLowerCase().includes('british columbia electoral district')) { ridingName = b.name; break; }
         }
-        return;
       }
-
-      // Match riding to our MLA list (fuzzy match on name)
-      const normalize = s => s.toLowerCase().replace(/[^a-z]/g, '');
-      const ridingNorm = normalize(ridingName);
-      let matched = BC_MLAS.find(m => normalize(m.r) === ridingNorm);
-      if (!matched) matched = BC_MLAS.find(m => ridingNorm.includes(normalize(m.r)) || normalize(m.r).includes(ridingNorm));
-      if (!matched) {
-        // Try partial word matching
-        const words = ridingName.toLowerCase().split(/[\s\-]+/).filter(w => w.length > 3);
-        matched = BC_MLAS.find(m => { const mr = m.r.toLowerCase(); return words.some(w => mr.includes(w)); });
-      }
-
-      if (matched) {
-        selectedMLA = matched;
-        const city = data.city || '';
-        if (city && !document.getElementById('l-city').value) document.getElementById('l-city').value = city;
-        showPostalStatus(`<span style="color:#059669;font-weight:800;font-size:1.1rem">✓</span> Found your riding: <strong>${matched.r}</strong>`, 'success');
-        showMLACard(matched);
+      if (ridingName) {
+        matchRidingToMLA(ridingName, raw);
       } else {
-        showPostalStatus(`Found riding "${ridingName}" but could not match it to an MLA in our database. <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">Search manually</button>`, 'error');
+        showPostalStatus('Could not determine riding. <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">Search manually</button>', 'error');
       }
     })
-    .catch(err => {
+    .catch(() => {
       document.getElementById('l-lookup-btn').disabled = false;
-      showPostalStatus('Could not look up this postal code. Check your connection or <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">search manually</button>.', 'error');
+      showPostalStatus('Lookup failed. <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">Search manually</button>', 'error');
     });
+}
+
+function matchRidingToMLA(ridingName, postalCode) {
+  const normalize = s => s.toLowerCase().replace(/[^a-z]/g, '');
+  const ridingNorm = normalize(ridingName);
+  let matched = BC_MLAS.find(m => normalize(m.r) === ridingNorm);
+  if (!matched) matched = BC_MLAS.find(m => ridingNorm.includes(normalize(m.r)) || normalize(m.r).includes(ridingNorm));
+  if (!matched) {
+    // Try word-level matching (at least 2 words match)
+    const rWords = ridingName.toLowerCase().split(/[\s\-–—]+/).filter(w => w.length > 2);
+    matched = BC_MLAS.find(m => {
+      const mWords = m.r.toLowerCase().split(/[\s\-–—]+/).filter(w => w.length > 2);
+      const overlap = rWords.filter(w => mWords.some(mw => mw.includes(w) || w.includes(mw)));
+      return overlap.length >= 2 || (rWords.length === 1 && mWords.some(mw => mw === rWords[0]));
+    });
+  }
+  if (!matched) {
+    // Last resort: single longest word match
+    const longest = ridingName.toLowerCase().split(/[\s\-–—]+/).sort((a,b) => b.length - a.length)[0];
+    if (longest && longest.length > 4) {
+      matched = BC_MLAS.find(m => m.r.toLowerCase().includes(longest));
+    }
+  }
+
+  if (matched) {
+    selectedMLA = matched;
+    showPostalStatus(`<span style="color:#059669;font-weight:800;font-size:1.1rem">✓</span> Found your riding: <strong>${matched.r}</strong>`, 'success');
+    showMLACard(matched);
+    document.getElementById('l-error').style.display = 'none';
+  } else {
+    showPostalStatus(`Found riding "${ridingName}" but could not match an MLA. <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">Search manually</button>`, 'error');
+  }
 }
 
 function showMLACard(m) {
