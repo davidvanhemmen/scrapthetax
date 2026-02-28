@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scrap the PST Grab — Budget 2026</title>
+<meta name="description" content="Budget 2026 expands PST to professional services. Sign the petition and write your MLA.">
+<meta property="og:title" content="Scrap the PST Grab — Take Action on Budget 2026">
+<meta property="og:description" content="B.C.'s Budget 2026 adds 7% PST to accounting, engineering, architecture & more. Sign the petition and tell your MLA.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --heading: 'DM Serif Display', Georgia, serif;
+  --body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --forest: #1B4332;
+  --forest-mid: #2D6A4F;
+  --forest-light: #40916C;
+  --mint: #D8F3DC;
+  --gold: #D4A843;
+  --cream: #FAFAF5;
+  --danger: #B91C1C;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); color: #1a1a1a; background: var(--cream); min-height: 100vh; }
+::selection { background: var(--mint); color: var(--forest); }
+::-webkit-scrollbar { width: 6px; height: 0; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+img { max-width: 100%; }
+a { color: inherit; }
+input, textarea, select, button { font-family: var(--body); }
+textarea:focus, input:focus, select:focus { border-color: var(--forest-light) !important; outline: none; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.fu { animation: fadeUp .6s ease-out both; }
+.fu1 { animation-delay: .1s; } .fu2 { animation-delay: .22s; } .fu3 { animation-delay: .36s; } .fu4 { animation-delay: .5s; }
+
+/* Components */
+.container { max-width: 700px; margin: 0 auto; }
+.card { background: #fff; border-radius: 14px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 6px 20px rgba(0,0,0,.025); border: 1px solid #E8E8E0; }
+.badge { display: inline-block; border-radius: 100px; padding: 4px 14px; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+.badge-mint { background: var(--mint); color: var(--forest); }
+.badge-gold { background: #FDE68A; color: #92400E; }
+.badge-hero { background: rgba(255,255,255,.12); color: #D8F3DC; border: 1px solid rgba(255,255,255,.15); }
+.btn-gold { background: var(--gold); color: var(--forest); border: none; border-radius: 6px; padding: 13px 28px; font-weight: 700; font-size: .92rem; cursor: pointer; transition: all .2s; }
+.btn-gold:hover { background: #c49a38; transform: translateY(-1px); }
+.btn-gold:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+.btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.3); border-radius: 6px; padding: 11px 24px; font-weight: 700; font-size: .88rem; cursor: pointer; transition: all .2s; }
+.btn-outline:hover { border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.06); }
+.btn-outline-dark { background: transparent; color: var(--forest); border: 2px solid #D1D5DB; border-radius: 6px; padding: 11px 24px; font-weight: 700; font-size: .88rem; cursor: pointer; transition: all .2s; }
+.btn-outline-dark:hover { border-color: var(--forest-light); }
+.input { width: 100%; padding: 11px 14px; border: 2px solid #D1D5DB; border-radius: 8px; font-size: .92rem; background: var(--cream); transition: border .2s; }
+.input-error { border-color: var(--danger) !important; }
+.label { display: block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: #374151; margin-bottom: 5px; }
+
+/* Nav */
+.nav { background: rgba(27,67,50,.97); backdrop-filter: blur(10px); padding: 0 1.25rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; height: 52px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.nav-brand { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.nav-links { display: flex; gap: 3px; }
+.nav-link { padding: 6px 10px; border-radius: 5px; border: none; background: transparent; color: rgba(255,255,255,.5); font-weight: 700; font-size: .72rem; cursor: pointer; transition: all .2s; }
+.nav-link.active { background: rgba(255,255,255,.13); color: #D8F3DC; }
+
+/* Carousel */
+.carousel-track { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 4px 2px 8px; -webkit-overflow-scrolling: touch; }
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-card { scroll-snap-align: start; min-width: 265px; max-width: 265px; flex-shrink: 0; background: #fff; border-radius: 14px; padding: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 16px rgba(0,0,0,.025); border: 1px solid #E8E8E0; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s, transform .15s; }
+.carousel-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); transform: translateY(-2px); }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 36px; height: 36px; border-radius: 50%; background: #fff; border: 1px solid #E5E7EB; box-shadow: 0 2px 8px rgba(0,0,0,.1); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--forest); transition: box-shadow .2s; }
+.carousel-btn:hover { box-shadow: 0 4px 14px rgba(0,0,0,.15); }
+
+/* Share buttons */
+.share-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 6px; border: none; font-size: .78rem; font-weight: 700; cursor: pointer; transition: all .15s; text-decoration: none; }
+.share-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+.share-x { background: #0f1419; color: #fff; }
+.share-li { background: #0A66C2; color: #fff; }
+.share-fb { background: #1877F2; color: #fff; }
+.share-email { background: #6B7280; color: #fff; }
+.share-copy { background: #E5E7EB; color: #374151; }
+
+/* Social post templates */
+.post-template { background: #F9FAFB; border: 1px solid #E5E7EB; border-radius: 10px; padding: 1rem; margin-bottom: 10px; position: relative; }
+.post-template-copy { position: absolute; top: 8px; right: 8px; background: var(--forest); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: .68rem; font-weight: 700; cursor: pointer; }
+
+/* Graphic cards */
+.graphic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.graphic-card { border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform .15s, box-shadow .15s; position: relative; }
+.graphic-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.graphic-card canvas { display: block; width: 100%; height: auto; }
+.graphic-dl { position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,.6); color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: .68rem; font-weight: 700; cursor: pointer; backdrop-filter: blur(4px); }
+
+/* Page sections */
+.page { display: none; }
+.page.active { display: block; }
+.hero { background: linear-gradient(170deg, #0F2B1F 0%, #1B4332 35%, #2D6A4F 70%, #40916C 100%); color: #fff; padding: 3.5rem 1.25rem 4.5rem; position: relative; overflow: hidden; }
+.hero-dots { position: absolute; inset: 0; opacity: .035; background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 24px 24px; }
+.section { padding: 3rem 1.25rem; }
+.section-alt { background: #F0F4F0; }
+.section-dark { background: var(--forest); color: #fff; }
+.section-cta { background: linear-gradient(165deg, #1B4332, #0F2B1F); color: #fff; text-align: center; }
+
+.footer { background: #0A1F15; color: #6B7280; padding: 1.75rem 1.25rem; text-align: center; font-size: .74rem; line-height: 1.65; }
+
+/* Responsive */
+@media (max-width: 480px) {
+  .nav-link { padding: 6px 7px; font-size: .66rem; }
+  .hero { padding: 2.5rem 1rem 3.5rem; }
+  .section { padding: 2rem 1rem; }
+  .graphic-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- NAVIGATION -->
+<!-- ═══════════════════════════════════════════════ -->
+<nav class="nav">
+  <button class="nav-brand" onclick="go('home')">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#52B788" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V13"/><path d="M17 8c0-5-5-5-5-5s-5 0-5 5c0 3 2 5 5 8 3-3 5-5 5-8z"/><path d="M8 18c-2 0-4-1-4-3s2-3 4-3"/><path d="M16 18c2 0 4-1 4-3s-2-3-4-3"/></svg>
+    <span style="color:#fff;font-family:var(--heading);font-size:.95rem">Scrap the PST Grab</span>
+  </button>
+  <div class="nav-links">
+    <button class="nav-link active" data-page="home" onclick="go('home')">Home</button>
+    <button class="nav-link" data-page="sign" onclick="go('sign')">Sign</button>
+    <button class="nav-link" data-page="letter" onclick="go('letter')">Letter</button>
+    <button class="nav-link" data-page="articles" onclick="go('articles')">Coverage</button>
+    <button class="nav-link" data-page="share" onclick="go('share')">Share</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HOME -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <header class="hero">
+    <div class="hero-dots"></div>
+    <div class="container" style="position:relative">
+      <span class="badge badge-hero fu" style="margin-bottom:1.25rem">Budget 2026 — Take Action Now</span>
+      <h1 class="fu fu1" style="font-family:var(--heading);font-size:clamp(2rem,5.5vw,3.2rem);font-weight:400;line-height:1.08;margin:1rem 0 .9rem">
+        PST on Professional Services<br><span style="color:var(--gold)">Threatens B.C.'s Economy</span>
+      </h1>
+      <p class="fu fu2" style="font-size:1.05rem;line-height:1.65;opacity:.88;max-width:540px;margin-bottom:1.75rem">
+        Budget 2026 adds <strong>$4 billion in new taxes</strong> while projecting a record <strong>$13.3 billion deficit</strong>. The PST expansion raises costs for housing, hurts public safety, and makes B.C. the least competitive province in Canada.
+      </p>
+      <div class="fu fu3" style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-gold" onclick="go('sign')">✍ Sign the Petition</button>
+        <button class="btn-outline" onclick="go('letter')">✉ Write Your MLA</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 4 Issues -->
+  <section class="section">
+    <div class="container">
+      <h2 style="font-family:var(--heading);font-size:clamp(1.5rem,4vw,2rem);color:var(--forest);margin-bottom:6px">Why This Tax Must Be Scrapped</h2>
+      <p style="color:#6B7280;margin-bottom:1.75rem;line-height:1.6;max-width:520px;font-size:.93rem">B.C. business leaders are calling on the Province to reverse the PST expansion. Here's why it matters.</p>
+      <div id="issues-grid" style="display:grid;gap:14px"></div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="section section-dark" style="padding:3rem 1.25rem">
+    <div class="container" style="max-width:600px">
+      <svg width="40" height="30" viewBox="0 0 48 36" fill="none" style="margin-bottom:14px;opacity:.2"><path d="M0 36V20.4C0 8.4 7.2 2 18 0l2.4 6C12 8 9.6 13.2 9.6 18H18v18H0zm27.6 0V20.4C27.6 8.4 34.8 2 45.6 0L48 6c-8.4 2-10.8 7.2-10.8 12H46v18H27.6z" fill="#52B788"/></svg>
+      <blockquote style="font-family:var(--heading);font-size:clamp(1.05rem,2.8vw,1.35rem);line-height:1.55;font-style:italic;font-weight:400;margin-bottom:1.25rem;color:rgba(255,255,255,.9)">
+        B.C. cannot afford policies that raise input costs, discourage investment, and weaken our competitive position. We urge the government to scrap these PST changes. We cannot tax our way to prosperity by targeting the essential services that build our homes, protect our streets, and grow our economy.
+      </blockquote>
+      <div style="font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.4);font-weight:700">— Joint statement from B.C. business leaders, February 24, 2026</div>
+    </div>
+  </section>
+
+  <!-- Article Carousel -->
+  <section class="section section-alt">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+        <h2 style="font-family:var(--heading);font-size:1.5rem;color:var(--forest)">In the News</h2>
+        <span id="article-count" style="font-size:.78rem;color:#6B7280"></span>
+      </div>
+      <div style="position:relative">
+        <button class="carousel-btn" style="left:-6px" onclick="scrollCarousel(-1)">‹</button>
+        <button class="carousel-btn" style="right:-6px" onclick="scrollCarousel(1)">›</button>
+        <div id="carousel-track" class="carousel-track"></div>
+      </div>
+      <div style="text-align:center;margin-top:14px">
+        <button class="btn-outline-dark" style="padding:8px 20px;font-size:.82rem" onclick="go('articles')">View All Coverage →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facts -->
+  <section class="section">
+    <div class="container">
+      <h2 style="font-family:var(--heading);font-size:1.5rem;color:var(--forest);margin-bottom:1.25rem">The Facts</h2>
+      <div id="facts-grid" style="display:grid;gap:10px"></div>
+    </div>
+  </section>
+
+  <!-- Quick Share -->
+  <section class="section section-alt" style="padding:2rem 1.25rem">
+    <div class="container" style="text-align:center">
+      <p style="font-weight:700;color:var(--forest);margin-bottom:10px;font-size:.9rem">Spread the word</p>
+      <div class="share-row" style="justify-content:center" id="home-share"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-cta" style="padding:3.5rem 1.25rem">
+    <div class="container" style="max-width:480px">
+      <h2 style="font-family:var(--heading);font-size:clamp(1.5rem,4vw,2rem);margin-bottom:8px">Your Voice Matters</h2>
+      <p style="opacity:.78;line-height:1.6;margin-bottom:1.75rem;font-size:.95rem">Politicians need to hear from you. Sign the petition and send a letter — it takes less than two minutes.</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-gold" onclick="go('sign')">✍ Sign the Petition</button>
+        <button class="btn-outline" onclick="go('letter')">✉ Write Your MLA</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SIGN PETITION -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-sign" class="page">
+  <section class="section">
+    <div class="container" style="max-width:530px">
+      <button class="btn-outline-dark" style="padding:6px 14px;font-size:.82rem;margin-bottom:18px;border-width:0;color:var(--forest-light)" onclick="go('home')">← Back</button>
+      <span class="badge badge-mint">Step 1 of 2</span>
+      <h2 style="font-family:var(--heading);font-size:1.6rem;color:var(--forest);margin-top:12px;margin-bottom:4px">Sign the Petition</h2>
+      <p style="color:#6B7280;margin-bottom:1.25rem;line-height:1.6;font-size:.9rem">Add your name to the growing number of British Columbians calling on the government to scrap the PST expansion.</p>
+      <div class="card">
+        <div style="background:#F0F4F0;border-radius:10px;padding:1.1rem;margin-bottom:1.25rem;border-left:4px solid var(--forest-light)">
+          <div style="font-weight:800;color:var(--forest);margin-bottom:5px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em">We, the undersigned, call on the BC Government to:</div>
+          <div style="color:#374151;font-size:.88rem;line-height:1.6">Scrap the Budget 2026 expansion of the Provincial Sales Tax to professional services — including accounting, engineering, architecture, security, and commercial real estate services. This tax harms housing affordability, threatens public safety, burdens small businesses, and makes B.C. less competitive.</div>
+        </div>
+        <div style="margin-bottom:14px"><label class="label">Full Name <span style="color:var(--danger)">*</span></label><input id="s-name" class="input" placeholder="Jane Smith"></div>
+        <div style="margin-bottom:14px"><label class="label">Email <span style="color:var(--danger)">*</span></label><input id="s-email" class="input" type="email" placeholder="jane@example.com"></div>
+        <div style="margin-bottom:14px"><label class="label">City / Community <span style="color:var(--danger)">*</span></label><input id="s-city" class="input" placeholder="Vancouver"></div>
+        <div style="margin-bottom:14px"><label class="label">Organization (optional)</label><input id="s-org" class="input" placeholder="Company or association"></div>
+        <div style="margin-bottom:14px"><label class="label">Role / Title (optional)</label><input id="s-role" class="input" placeholder="e.g. CPA, Engineer, Retailer"></div>
+        <label style="display:flex;gap:10px;align-items:flex-start;margin-bottom:1.25rem;cursor:pointer">
+          <input type="checkbox" id="s-agree" style="margin-top:3px;accent-color:var(--forest-light);width:18px;height:18px;flex-shrink:0">
+          <span style="font-size:.82rem;color:#4B5563;line-height:1.5">I agree to add my name to this petition calling on the B.C. Government to scrap the PST expansion on professional services.</span>
+        </label>
+        <div id="s-error" style="color:var(--danger);font-size:.82rem;margin-bottom:10px;display:none"></div>
+        <button class="btn-gold" style="width:100%;text-align:center" onclick="submitPetition()">✍ Add My Name</button>
+      </div>
+      <div style="text-align:center;margin-top:1.25rem">
+        <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;font-family:var(--body);font-size:.88rem" onclick="go('letter')">Next: Write Your MLA →</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SEND LETTER -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-letter" class="page">
+  <section class="section">
+    <div class="container" style="max-width:600px">
+      <button class="btn-outline-dark" style="padding:6px 14px;font-size:.82rem;margin-bottom:18px;border-width:0;color:var(--forest-light)" onclick="go('home')">← Back</button>
+      <span class="badge badge-mint">Step 2 of 2</span>
+      <h2 style="font-family:var(--heading);font-size:1.6rem;color:var(--forest);margin-top:12px;margin-bottom:4px">Write Your MLA</h2>
+      <p style="color:#6B7280;margin-bottom:1.25rem;line-height:1.6;font-size:.9rem">Select your riding, personalize the letter, and send it directly.</p>
+
+      <div class="card" style="margin-bottom:10px">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:10px;font-size:.85rem">Your Information</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label class="label">Full Name <span style="color:var(--danger)">*</span></label><input id="l-name" class="input" placeholder="Jane Smith"></div>
+          <div><label class="label">City <span style="color:var(--danger)">*</span></label><input id="l-city" class="input" placeholder="Vancouver"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:10px">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:4px;font-size:.85rem">Find Your MLA</div>
+        <p style="font-size:.78rem;color:#6B7280;margin-bottom:12px;line-height:1.5">Enter your postal code and we'll automatically find your riding and MLA.</p>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="flex:1">
+            <input id="l-postal" class="input" placeholder="e.g. V5K 0A1" maxlength="7" style="text-transform:uppercase;font-weight:700;font-size:1.05rem;letter-spacing:.08em" oninput="onPostalInput(this)" onkeydown="if(event.key==='Enter')lookupPostalCode()">
+          </div>
+          <button class="btn-gold" style="padding:11px 22px;font-size:.88rem;white-space:nowrap" onclick="lookupPostalCode()" id="l-lookup-btn">Find MLA</button>
+        </div>
+        <div id="l-postal-status" style="margin-top:10px;display:none"></div>
+        <div id="mla-selected" style="display:none;margin-top:12px"></div>
+      </div>
+
+      <div class="card" style="margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="font-weight:700;color:var(--forest);font-size:.85rem">Your Letter</div>
+          <button onclick="resetLetter()" style="background:none;border:1px solid #D1D5DB;border-radius:4px;padding:3px 10px;font-size:.68rem;color:#6B7280;cursor:pointer;font-family:var(--body)">Reset</button>
+        </div>
+        <textarea id="l-letter" class="input" style="min-height:380px;line-height:1.6;resize:vertical"></textarea>
+        <p style="font-size:.7rem;color:#9CA3AF;margin-top:6px">Placeholders [MLA_NAME], [RIDING], [YOUR_NAME], [YOUR_CITY] are replaced automatically.</p>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-gold" style="flex:1;text-align:center;min-width:180px" onclick="sendLetter()">✉ Open in Email</button>
+        <button class="btn-outline-dark" style="min-width:120px;text-align:center" onclick="copyLetter()">📋 Copy</button>
+      </div>
+      <p id="l-error" style="color:var(--danger);font-size:.8rem;margin-top:8px;display:none">Enter your postal code above to find your MLA.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ARTICLES / COVERAGE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-articles" class="page">
+  <section class="section">
+    <div class="container">
+      <button class="btn-outline-dark" style="padding:6px 14px;font-size:.82rem;margin-bottom:18px;border-width:0;color:var(--forest-light)" onclick="go('home')">← Back</button>
+      <h2 style="font-family:var(--heading);font-size:1.6rem;color:var(--forest);margin-bottom:4px">Media Coverage & Resources</h2>
+      <p style="color:#6B7280;margin-bottom:1.5rem;line-height:1.6;font-size:.9rem">Articles, statements, and analysis on the Budget 2026 PST expansion.</p>
+
+      <div class="card" style="margin-bottom:1.5rem;background:#F9FAFB">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:14px;font-size:.88rem">Add an Article</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div style="grid-column:1/-1"><label class="label">Headline <span style="color:var(--danger)">*</span></label><input id="a-title" class="input" placeholder="Article title..."></div>
+          <div><label class="label">Source</label><input id="a-source" class="input" placeholder="e.g. Vancouver Sun"></div>
+          <div><label class="label">Date</label><input id="a-date" class="input" placeholder="e.g. Feb 27, 2026"></div>
+          <div><label class="label">URL <span style="color:var(--danger)">*</span></label><input id="a-url" class="input" placeholder="https://..."></div>
+          <div><label class="label">Tag</label>
+            <select id="a-tag" class="input" style="cursor:pointer">
+              <option>News</option><option>Coalition Statement</option><option>Local Government</option><option>Legal Analysis</option><option>Tax Advisory</option><option>Op-Ed</option><option>Industry</option>
+            </select>
+          </div>
+          <div style="grid-column:1/-1"><label class="label">Excerpt</label><textarea id="a-excerpt" class="input" style="min-height:60px;resize:vertical;line-height:1.5" placeholder="Brief description..."></textarea></div>
+        </div>
+        <button class="btn-gold" style="padding:10px 22px;font-size:.85rem" onclick="addArticle()">+ Add Article</button>
+      </div>
+      <div id="articles-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SHARE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-share" class="page">
+  <section class="section">
+    <div class="container">
+      <button class="btn-outline-dark" style="padding:6px 14px;font-size:.82rem;margin-bottom:18px;border-width:0;color:var(--forest-light)" onclick="go('home')">← Back</button>
+      <h2 style="font-family:var(--heading);font-size:1.6rem;color:var(--forest);margin-bottom:4px">Share the Campaign</h2>
+      <p style="color:#6B7280;margin-bottom:1.5rem;line-height:1.6;font-size:.9rem">Download graphics, copy ready-made social posts, and share across your platforms.</p>
+
+      <!-- Share buttons -->
+      <div class="card" style="margin-bottom:16px">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:12px;font-size:.88rem">Share this tool</div>
+        <div class="share-row" id="share-page-buttons"></div>
+      </div>
+
+      <!-- Downloadable Graphics -->
+      <div class="card" style="margin-bottom:16px">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:12px;font-size:.88rem">Shareable Graphics</div>
+        <p style="color:#6B7280;font-size:.82rem;margin-bottom:14px;line-height:1.5">Click any graphic to download. Sized for social media (1200×630).</p>
+        <div class="graphic-grid" id="graphics-grid"></div>
+      </div>
+
+      <!-- Copy-paste social posts -->
+      <div class="card">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:12px;font-size:.88rem">Ready-Made Social Posts</div>
+        <p style="color:#6B7280;font-size:.82rem;margin-bottom:14px;line-height:1.5">Copy and paste these to your social channels. Click the copy button on each.</p>
+        <div id="social-posts"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- THANK YOU / DONE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div id="page-done" class="page">
+  <section class="section" style="min-height:65vh;display:flex;align-items:center">
+    <div class="container" style="max-width:480px;text-align:center">
+      <div class="fu" style="width:80px;height:80px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:2.2rem;color:var(--forest)">✓</div>
+      <h2 class="fu fu1" style="font-family:var(--heading);font-size:1.8rem;color:var(--forest);margin-bottom:8px">Thank You for Taking Action</h2>
+      <p class="fu fu2" style="color:#4B5563;line-height:1.65;margin-bottom:1.5rem;font-size:.93rem">Every signature and letter makes a difference. Now share the campaign to amplify the message.</p>
+
+      <!-- Share after action -->
+      <div class="card fu fu3" style="text-align:left;margin-bottom:1.25rem">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:12px;font-size:.88rem">Share with your network</div>
+        <div class="share-row" id="done-share"></div>
+      </div>
+
+      <div class="card fu fu3" style="text-align:left;margin-bottom:1.5rem">
+        <div style="font-weight:700;color:var(--forest);margin-bottom:12px;font-size:.85rem">What's Next?</div>
+        <div id="done-checklist"></div>
+      </div>
+
+      <div class="fu fu4" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-gold" id="done-letter-btn" onclick="go('letter')">✉ Write Your MLA</button>
+        <button class="btn-outline-dark" onclick="go('home')">← Home</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p style="margin-bottom:6px">A campaign opposing the Budget 2026 PST expansion to professional services.</p>
+  <p>This tool opens your email client to send letters. <strong style="color:#9CA3AF">No personal data is stored or transmitted.</strong></p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// SUPABASE CONFIG — Add your credentials to activate
+// ═══════════════════════════════════════════════
+const SUPABASE_URL = '';  // e.g. 'https://xxxxx.supabase.co'
+const SUPABASE_KEY = '';  // your anon/public key
+const USE_SUPABASE = SUPABASE_URL && SUPABASE_KEY;
+let supabase = null;
+
+if (USE_SUPABASE) {
+  // Load Supabase client dynamically
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  script.onload = () => {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    loadFromSupabase();
+  };
+  document.head.appendChild(script);
+}
+
+async function loadFromSupabase() {
+  if (!supabase) return;
+  try {
+    const { data } = await supabase.from('articles').select('*').order('created_at', { ascending: false });
+    if (data && data.length) { articles = data; renderCarousel(); renderArticlesList(); }
+    const { count } = await supabase.from('signatures').select('*', { count: 'exact', head: true });
+    if (count) sigCount = count;
+    const { count: lc } = await supabase.from('letters').select('*', { count: 'exact', head: true });
+    if (lc) letterCount = lc;
+  } catch (e) { console.log('Supabase load:', e); }
+}
+
+async function savePetition(data) {
+  if (!supabase) return;
+  try { await supabase.from('signatures').insert([data]); } catch (e) { console.log('Save petition:', e); }
+}
+
+async function saveLetterLog(data) {
+  if (!supabase) return;
+  try { await supabase.from('letters').insert([data]); } catch (e) { console.log('Save letter:', e); }
+}
+
+async function saveArticle(data) {
+  if (!supabase) return;
+  try { await supabase.from('articles').insert([data]); } catch (e) { console.log('Save article:', e); }
+}
+
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+const SITE_URL = window.location.href.split('?')[0];
+const CAMPAIGN_TEXT = "B.C.'s Budget 2026 adds 7% PST to accounting, engineering, architecture & more. Sign the petition and tell your MLA to scrap it.";
+let sigCount = 0;
+let letterCount = 0;
+let sentLetter = false;
+
+const BC_MLAS=[{r:"Abbotsford-Mission",n:"Pam Alexis",p:"NDP",e:"pam.alexis.mla@leg.bc.ca"},{r:"Abbotsford South",n:"Bruce Banman",p:"Con",e:"bruce.banman.mla@leg.bc.ca"},{r:"Abbotsford West",n:"Mike de Jong",p:"Con",e:"mike.dejong.mla@leg.bc.ca"},{r:"Bulkley Valley-Stikine",n:"Nathan Cullen",p:"NDP",e:"nathan.cullen.mla@leg.bc.ca"},{r:"Burnaby Centre",n:"Alison Gu",p:"NDP",e:"alison.gu.mla@leg.bc.ca"},{r:"Burnaby East",n:"Janet Routledge",p:"NDP",e:"janet.routledge.mla@leg.bc.ca"},{r:"Burnaby North",n:"Raj Chouhan",p:"NDP",e:"raj.chouhan.mla@leg.bc.ca"},{r:"Burnaby South-Metrotown",n:"Anne Kang",p:"NDP",e:"anne.kang.mla@leg.bc.ca"},{r:"Chilliwack-Cultus Lake",n:"Á'a:líya Warbus",p:"NDP",e:"aaliya.warbus.mla@leg.bc.ca"},{r:"Chilliwack North",n:"Heather Maahs",p:"Con",e:"heather.maahs.mla@leg.bc.ca"},{r:"Columbia River-Revelstoke",n:"Brittny Anderson",p:"NDP",e:"brittny.anderson.mla@leg.bc.ca"},{r:"Coquitlam-Burke Mountain",n:"Fin Donnelly",p:"NDP",e:"fin.donnelly.mla@leg.bc.ca"},{r:"Coquitlam-Maillardville",n:"Selina Robinson",p:"NDP",e:"selina.robinson.mla@leg.bc.ca"},{r:"Courtenay-Comox",n:"Ronna-Rae Leonard",p:"NDP",e:"ronna-rae.leonard.mla@leg.bc.ca"},{r:"Cowichan Valley",n:"Sonia Furstenau",p:"Green",e:"sonia.furstenau.mla@leg.bc.ca"},{r:"Delta North",n:"Ravi Kahlon",p:"NDP",e:"ravi.kahlon.mla@leg.bc.ca"},{r:"Delta South",n:"Ian Paton",p:"Con",e:"ian.paton.mla@leg.bc.ca"},{r:"Esquimalt-Colwood",n:"Mitzi Dean",p:"NDP",e:"mitzi.dean.mla@leg.bc.ca"},{r:"Fraser-Nicola",n:"Jackie Tegart",p:"Con",e:"jackie.tegart.mla@leg.bc.ca"},{r:"Juan de Fuca-Malahat",n:"Dana Lajeunesse",p:"Con",e:"dana.lajeunesse.mla@leg.bc.ca"},{r:"Kamloops Centre",n:"Todd Stone",p:"Con",e:"todd.stone.mla@leg.bc.ca"},{r:"Kamloops-North Thompson",n:"Peter Milobar",p:"Con",e:"peter.milobar.mla@leg.bc.ca"},{r:"Kelowna Centre",n:"Loyal Wooldridge",p:"Con",e:"loyal.wooldridge.mla@leg.bc.ca"},{r:"Kelowna-Lake Country",n:"Norm Letnick",p:"Con",e:"norm.letnick.mla@leg.bc.ca"},{r:"Kelowna-Mission",n:"Gavin Dew",p:"Con",e:"gavin.dew.mla@leg.bc.ca"},{r:"Kootenay-Rockies",n:"Pete Davis",p:"Con",e:"pete.davis.mla@leg.bc.ca"},{r:"Kootenay Central",n:"Tara Armstrong",p:"NDP",e:"tara.armstrong.mla@leg.bc.ca"},{r:"Langford-Highlands",n:"Ravi Parmar",p:"NDP",e:"ravi.parmar.mla@leg.bc.ca"},{r:"Langley-Abbotsford",n:"Harman Bhangu",p:"Con",e:"harman.bhangu.mla@leg.bc.ca"},{r:"Langley-Walnut Grove",n:"Andrew Mercier",p:"NDP",e:"andrew.mercier.mla@leg.bc.ca"},{r:"Langley-Willowbrook",n:"Misty Van Popta",p:"Con",e:"misty.vanpopta.mla@leg.bc.ca"},{r:"Maple Ridge East",n:"Bob D'Eith",p:"NDP",e:"bob.deith.mla@leg.bc.ca"},{r:"Maple Ridge-Pitt Meadows",n:"Lisa Beare",p:"NDP",e:"lisa.beare.mla@leg.bc.ca"},{r:"Mid Island-Pacific Rim",n:"Josie Osborne",p:"NDP",e:"josie.osborne.mla@leg.bc.ca"},{r:"Nanaimo-Gabriola Island",n:"Sheila Malcolmson",p:"NDP",e:"sheila.malcolmson.mla@leg.bc.ca"},{r:"Nanaimo-Lantzville",n:"Gwen O'Mahony",p:"NDP",e:"gwen.omahony.mla@leg.bc.ca"},{r:"Nechako Lakes",n:"John Rustad",p:"Con",e:"john.rustad.mla@leg.bc.ca"},{r:"Nelson-Creston",n:"Brittny Anderson",p:"NDP",e:"brittny.anderson.mla@leg.bc.ca"},{r:"New Westminster-Coquitlam",n:"Jennifer Whiteside",p:"NDP",e:"jennifer.whiteside.mla@leg.bc.ca"},{r:"North Coast-Haida Gwaii",n:"Jennifer Rice",p:"NDP",e:"jennifer.rice.mla@leg.bc.ca"},{r:"North Island",n:"Michele Babchuk",p:"NDP",e:"michele.babchuk.mla@leg.bc.ca"},{r:"North Vancouver-Lonsdale",n:"Bowinn Ma",p:"NDP",e:"bowinn.ma.mla@leg.bc.ca"},{r:"North Vancouver-Seymour",n:"Susie Chant",p:"NDP",e:"susie.chant.mla@leg.bc.ca"},{r:"Oak Bay-Gordon Head",n:"Murray Rankin",p:"NDP",e:"murray.rankin.mla@leg.bc.ca"},{r:"Penticton-Summerland",n:"Amelia Boultbee",p:"Con",e:"amelia.boultbee.mla@leg.bc.ca"},{r:"Port Coquitlam",n:"Mike Farnworth",p:"NDP",e:"mike.farnworth.mla@leg.bc.ca"},{r:"Port Moody-Burquitlam",n:"Rick Glumac",p:"NDP",e:"rick.glumac.mla@leg.bc.ca"},{r:"Powell River-Sunshine Coast",n:"Nicholas Simons",p:"NDP",e:"nicholas.simons.mla@leg.bc.ca"},{r:"Prince George-Mackenzie",n:"Kiel Giddens",p:"Con",e:"kiel.giddens.mla@leg.bc.ca"},{r:"Prince George-North Cariboo",n:"Sheldon Clare",p:"Con",e:"sheldon.clare.mla@leg.bc.ca"},{r:"Prince George-Valemount",n:"Rosalyn Bird",p:"Con",e:"rosalyn.bird.mla@leg.bc.ca"},{r:"Richmond-Queensborough",n:"Aman Singh",p:"NDP",e:"aman.singh.mla@leg.bc.ca"},{r:"Richmond Centre",n:"Teresa Wat",p:"Con",e:"teresa.wat.mla@leg.bc.ca"},{r:"Richmond-Steveston",n:"Kelly Greene",p:"NDP",e:"kelly.greene.mla@leg.bc.ca"},{r:"Saanich North and the Islands",n:"Rob Fleming",p:"NDP",e:"rob.fleming.mla@leg.bc.ca"},{r:"Saanich South",n:"Lana Popham",p:"NDP",e:"lana.popham.mla@leg.bc.ca"},{r:"Salmon Arm-Shuswap",n:"Sylvia Lindgren",p:"Con",e:"sylvia.lindgren.mla@leg.bc.ca"},{r:"Skeena",n:"Claire Rattée",p:"Con",e:"claire.rattee.mla@leg.bc.ca"},{r:"South Okanagan-West Kootenay",n:"Roly Russell",p:"NDP",e:"roly.russell.mla@leg.bc.ca"},{r:"South Surrey-Cloverdale",n:"Elenore Sturko",p:"Con",e:"elenore.sturko.mla@leg.bc.ca"},{r:"Surrey Centre",n:"Brent Chapman",p:"Con",e:"brent.chapman.mla@leg.bc.ca"},{r:"Surrey-Cloverdale",n:"Mike Starchuk",p:"NDP",e:"mike.starchuk.mla@leg.bc.ca"},{r:"Surrey-Guildford",n:"Garry Begg",p:"NDP",e:"garry.begg.mla@leg.bc.ca"},{r:"Surrey-Newton",n:"Harry Bains",p:"NDP",e:"harry.bains.mla@leg.bc.ca"},{r:"Surrey-Panorama",n:"Jinny Sims",p:"NDP",e:"jinny.sims.mla@leg.bc.ca"},{r:"Surrey-Serpentine River",n:"Pardeep Nagra",p:"NDP",e:"pardeep.nagra.mla@leg.bc.ca"},{r:"Surrey-White Rock",n:"Trevor Halford",p:"Con",e:"trevor.halford.mla@leg.bc.ca"},{r:"Vancouver-Fraserview",n:"George Chow",p:"NDP",e:"george.chow.mla@leg.bc.ca"},{r:"Vancouver-Hastings",n:"Niki Sharma",p:"NDP",e:"niki.sharma.mla@leg.bc.ca"},{r:"Vancouver-Kensington",n:"Mable Elmore",p:"NDP",e:"mable.elmore.mla@leg.bc.ca"},{r:"Vancouver-Langara",n:"Sunita Dhir",p:"NDP",e:"sunita.dhir.mla@leg.bc.ca"},{r:"Vancouver-Little Mountain",n:"Christine Boyle",p:"NDP",e:"christine.boyle.mla@leg.bc.ca"},{r:"Vancouver-Point Grey",n:"David Eby",p:"NDP",e:"david.eby.mla@leg.bc.ca"},{r:"Vancouver-Quilchena",n:"Dallas Brodie",p:"Ind",e:"dallas.brodie.mla@leg.bc.ca"},{r:"Vancouver-Renfrew",n:"Adrian Dix",p:"NDP",e:"adrian.dix.mla@leg.bc.ca"},{r:"Vancouver-South Granville",n:"Brenda Bailey",p:"NDP",e:"brenda.bailey.mla@leg.bc.ca"},{r:"Vancouver-Strathcona",n:"Joan Phillip",p:"NDP",e:"joan.phillip.mla@leg.bc.ca"},{r:"Vancouver-West End",n:"Spencer Chandra Herbert",p:"NDP",e:"s.chandraherbert.mla@leg.bc.ca"},{r:"Vancouver-Yaletown",n:"Terry Yung",p:"Con",e:"terry.yung.mla@leg.bc.ca"},{r:"Vernon-Monashee",n:"Harwinder Sandhu",p:"NDP",e:"harwinder.sandhu.mla@leg.bc.ca"},{r:"Victoria-Beacon Hill",n:"Grace Lore",p:"NDP",e:"grace.lore.mla@leg.bc.ca"},{r:"Victoria-Swan Lake",n:"Nikki Sharma",p:"NDP",e:"nikki.sharma.mla@leg.bc.ca"},{r:"West Kelowna-Peachland",n:"Donegal Wilson",p:"Con",e:"donegal.wilson.mla@leg.bc.ca"},{r:"West Vancouver-Capilano",n:"Karin Kirkpatrick",p:"Con",e:"karin.kirkpatrick.mla@leg.bc.ca"},{r:"West Vancouver-Sea to Sky",n:"Jordan Sturdy",p:"Con",e:"jordan.sturdy.mla@leg.bc.ca"}];
+
+let selectedMLA = null;
+
+let articles = [
+  { id:1, title:"PST tax hike threatens competitiveness, safety, and affordability", source:"Business Council of BC", date:"Feb 24, 2026", tag:"Coalition Statement", url:"https://www.bcbc.com/news/pst-tax-hike-threatens-competitiveness-safety-and-affordability", excerpt:"Business leaders representing key pillars of B.C.'s economy called on the province to scrap the newly announced expansion of the PST." },
+  { id:2, title:"Expansion of PST to Increase Local Government Costs", source:"Union of BC Municipalities", date:"Feb 2026", tag:"Local Government", url:"https://www.ubcm.ca/about-ubcm/latest-news/expansion-pst-increase-local-government-costs", excerpt:"Budget 2026 expanded the PST to professional services — increasing costs for local governments that depend on them." },
+  { id:3, title:"B.C.'s PST will be expanded in 2026, especially for real estate", source:"Daily Hive", date:"Feb 17, 2026", tag:"News", url:"https://dailyhive.com/vancouver/bc-pst-tax-applicable-changes-2026", excerpt:"The expansion of PST to include select professional services will increase revenues by $261 million in 2026/2027." },
+  { id:4, title:"B.C. Budget 2026: Real Estate Highlights", source:"Fasken", date:"Feb 2026", tag:"Legal Analysis", url:"https://www.fasken.com/en/knowledge/2026/02/bc-budget-2026-real-estate-highlights", excerpt:"The scope of the PST will expand to several new categories of professional services including commercial real estate." },
+  { id:5, title:"BC Notice 2026-001 — PST Expansion to Professional Services", source:"Crowe Soberman", date:"Feb 2026", tag:"Tax Advisory", url:"https://www.crowe.com/ca/crowesoberman/insights/bc-notice-2026-001-pst-expansion-professional-services", excerpt:"This marks one of the most significant base expansions of the B.C. PST. AEG services face an effective rate of 2.1%." },
+];
+
+const TAG_COLORS = { "Coalition Statement":{bg:"#FDE68A",fg:"#92400E"}, "Local Government":{bg:"#DBEAFE",fg:"#1E40AF"}, "News":{bg:"#D8F3DC",fg:"#1B4332"}, "Legal Analysis":{bg:"#E0E7FF",fg:"#3730A3"}, "Tax Advisory":{bg:"#FCE7F3",fg:"#9D174D"}, "Op-Ed":{bg:"#FEF3C7",fg:"#92400E"}, "Industry":{bg:"#F0FDF4",fg:"#166534"} };
+
+const DEFAULT_LETTER = `Dear [MLA_NAME],
+
+I am writing as a constituent of [RIDING] to express serious concern about the expansion of the Provincial Sales Tax (PST) to professional services announced in Budget 2026.
+
+B.C. cannot afford policies that raise input costs, discourage investment, and weaken our competitive position. B.C.'s PST is already the most uncompetitive sales tax in Canada, and Budget 2026 doubles down on this flaw.
+
+HOUSING AFFORDABILITY
+Instead of following through on promises to accelerate housing construction, Budget 2026 raises the cost of homebuilding. Taxing architectural and engineering services is a direct hit to affordability and project viability.
+
+PUBLIC SAFETY
+While the government says it wants safe streets, it is taxing security services and punishing small businesses for protecting their stores. Businesses already spending thousands to combat rising crime will now pay 7% more.
+
+COMPETITIVENESS
+In Alberta, there is 0% PST. In Ontario and Quebec, businesses get their sales tax refunded. In B.C., it's a permanent loss — a "tax on a tax" that compounds at every stage.
+
+ADMINISTRATIVE BURDEN
+Thousands of small firms will have to register for PST and manage two entirely different tax systems. CFIB estimates compliance costs at up to $7,000 per year per employee.
+
+I urge you to scrap these PST changes. We cannot tax our way to prosperity by targeting the essential services that build our homes, protect our streets, and grow our economy.
+
+Sincerely,
+[YOUR_NAME]
+[YOUR_CITY], British Columbia`;
+
+const SOCIAL_POSTS = [
+  { platform: "X / Twitter", icon: "𝕏", text: `B.C.'s Budget 2026 slaps 7% PST on accounting, engineering, architecture & security services.\n\n0% in Alberta. Refundable in Ontario.\nIn B.C.? A permanent cost.\n\nThis makes housing more expensive and businesses less competitive.\n\nTell your MLA → ${SITE_URL}\n\n#ScrapThePSTGrab #BCpoli` },
+  { platform: "LinkedIn", icon: "in", text: `Budget 2026 introduces a 7% PST on professional services in British Columbia — accounting, engineering, architecture, security, and commercial real estate.\n\nUnlike the GST or HST, B.C.'s PST is not refundable. It cascades through every project, compounding costs at each stage. CFIB estimates compliance costs of up to $7,000/year per employee.\n\nAlberta charges 0%. Ontario and Quebec refund their sales tax. B.C. is now the least competitive province for professional services.\n\nIf you're a business owner, professional, or concerned citizen in B.C., take two minutes to sign the petition and write your MLA: ${SITE_URL}\n\n#BCBudget2026 #PST #BCpoli` },
+  { platform: "Facebook", icon: "f", text: `Did you know B.C.'s Budget 2026 adds a 7% tax on the services needed to build your home, keep your business safe, and manage your property?\n\nThis means:\n🏠 Higher housing costs\n🔒 More expensive security for small businesses\n📉 B.C. becomes less competitive than every other province\n💳 $80 billion more in debt\n\nAlberta charges 0% on these services. In B.C., it's a permanent cost.\n\nSign the petition and write your MLA — it takes 2 minutes: ${SITE_URL}` },
+  { platform: "Email to a friend", icon: "✉", text: `Hey — wanted to share this with you.\n\nB.C.'s Budget 2026 is expanding the PST to professional services like accounting, engineering, architecture, and security. It takes effect October 1, 2026.\n\nThis affects housing costs, business costs, and makes B.C. less competitive than almost every other province. There's a tool to sign a petition and send a letter directly to your MLA — takes about 2 minutes:\n\n${SITE_URL}\n\nWorth a look if you care about where this province is heading.` },
+];
+
+// ═══════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════
+function go(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.page === page));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (page === 'letter') { document.getElementById('l-letter').value = document.getElementById('l-letter').value || DEFAULT_LETTER; }
+  if (page === 'done') renderDone();
+}
+
+// ═══════════════════════════════════════════════
+// SHARE BUTTONS GENERATOR
+// ═══════════════════════════════════════════════
+function makeShareButtons(container) {
+  const el = document.getElementById(container);
+  const url = encodeURIComponent(SITE_URL);
+  const text = encodeURIComponent(CAMPAIGN_TEXT);
+  el.innerHTML = `
+    <a class="share-btn share-x" href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank" rel="noopener">𝕏 Post</a>
+    <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener">in Share</a>
+    <a class="share-btn share-fb" href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener">f Share</a>
+    <a class="share-btn share-email" href="mailto:?subject=${encodeURIComponent('Take action on B.C. Budget 2026 PST expansion')}&body=${text}%0A%0A${url}">✉ Email</a>
+    <button class="share-btn share-copy" onclick="navigator.clipboard.writeText('${SITE_URL}');this.textContent='✓ Copied!';setTimeout(()=>this.textContent='🔗 Copy Link',2000)">🔗 Copy Link</button>
+  `;
+}
+
+// ═══════════════════════════════════════════════
+// ISSUES
+// ═══════════════════════════════════════════════
+function renderIssues() {
+  const issues = [
+    { icon:"🏠", n:"01", title:"Affordability", accent:"#059669", body:"Instead of following through on promises to accelerate housing construction, Budget 2026 raises the cost of homebuilding. Taxing architectural and engineering services is a direct hit to affordability — at a time when housing projects are being shelved across B.C." },
+    { icon:"🔒", n:"02", title:"Public Safety", accent:"#B91C1C", body:"While the government says it wants safe streets, it is taxing security services and punishing small businesses for protecting their stores. For the first time, businesses must pay a 7% tax just to keep their staff and property safe." },
+    { icon:"📉", n:"03", title:"Competitiveness", accent:"#D97706", body:"B.C.'s PST is already the most uncompetitive sales tax in Canada. In Alberta, there is 0% PST. In Ontario and Quebec, businesses get their sales tax refunded. In B.C., it's a permanent loss — a \"tax on a tax\" that compounds costs at every stage." },
+    { icon:"💳", n:"04", title:"Generational Debt", accent:"#7C3AED", body:"Budget 2026 adds over $4 billion in new taxes while still projecting a record $13.3 billion deficit. A planned $80 billion increase in debt pushes B.C.'s debt-to-GDP ratio toward 37%." },
+  ];
+  document.getElementById('issues-grid').innerHTML = issues.map(x => `
+    <div class="card" style="display:flex;gap:18px;align-items:flex-start">
+      <div style="min-width:48px;text-align:center"><span style="font-size:1.8rem;display:block;margin-bottom:2px">${x.icon}</span><span style="font-family:var(--heading);font-size:1rem;color:${x.accent};opacity:.4">${x.n}</span></div>
+      <div><h3 style="font-family:var(--heading);font-size:1.12rem;color:var(--forest);margin-bottom:5px">${x.title}</h3><p style="color:#4B5563;line-height:1.6;font-size:.88rem">${x.body}</p></div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+// FACTS
+// ═══════════════════════════════════════════════
+function renderFacts() {
+  const facts = [
+    { stat:"$7,000", text:"Estimated annual compliance cost per employee for businesses newly registering for PST (CFIB)." },
+    { stat:"0%", text:"PST on professional services in Alberta. Ontario and Quebec refund sales tax to businesses." },
+    { stat:"$80B", text:"Planned increase in provincial debt over three years — pushing debt-to-GDP toward 37%." },
+    { stat:"7%", text:"New PST on accounting, bookkeeping, security, property management, and non-residential real estate. Effective Oct 1, 2026." },
+    { stat:"2.1%", text:"Effective PST on architectural, engineering, and geoscience services (7% × 30% of purchase price)." },
+  ];
+  document.getElementById('facts-grid').innerHTML = facts.map(f => `
+    <div class="card" style="display:flex;gap:18px;align-items:center;padding:1.1rem 1.25rem">
+      <div style="font-family:var(--heading);font-size:1.5rem;color:#B91C1C;min-width:72px;text-align:center;font-style:italic">${f.stat}</div>
+      <div style="color:#4B5563;font-size:.86rem;line-height:1.55">${f.text}</div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════
+// CAROUSEL
+// ═══════════════════════════════════════════════
+function renderCarousel() {
+  document.getElementById('article-count').textContent = articles.length + ' articles';
+  document.getElementById('carousel-track').innerHTML = articles.map(a => {
+    const tc = TAG_COLORS[a.tag] || TAG_COLORS['News'];
+    return `<a href="${a.url}" target="_blank" rel="noopener" class="carousel-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span style="background:${tc.bg};color:${tc.fg};border-radius:100px;padding:3px 10px;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em">${a.tag}</span>
+        <span style="font-size:.66rem;color:#9CA3AF">${a.date}</span>
+      </div>
+      <div style="font-family:var(--heading);font-size:.92rem;color:var(--forest);line-height:1.3;margin-bottom:8px;flex:1">${a.title}</div>
+      <div style="font-size:.76rem;color:#6B7280;line-height:1.5;margin-bottom:10px">${(a.excerpt||'').slice(0,100)}${(a.excerpt||'').length>100?'...':''}</div>
+      <div style="font-size:.7rem;color:var(--forest-light);font-weight:700">${a.source} →</div>
+    </a>`;
+  }).join('');
+}
+
+function scrollCarousel(dir) {
+  document.getElementById('carousel-track').scrollBy({ left: dir * 285, behavior: 'smooth' });
+}
+
+// ═══════════════════════════════════════════════
+// ARTICLES LIST
+// ═══════════════════════════════════════════════
+function renderArticlesList() {
+  document.getElementById('articles-list').innerHTML = articles.map(a => {
+    const tc = TAG_COLORS[a.tag] || TAG_COLORS['News'];
+    return `<div class="card" style="padding:1.25rem;display:flex;gap:16px;margin-bottom:12px">
+      <div style="flex:1">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
+          <span style="background:${tc.bg};color:${tc.fg};border-radius:100px;padding:2px 9px;font-size:.63rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em">${a.tag}</span>
+          ${a.source?`<span style="font-size:.72rem;color:#6B7280;font-weight:600">${a.source}</span>`:''}
+          ${a.date?`<span style="font-size:.68rem;color:#9CA3AF">${a.date}</span>`:''}
+        </div>
+        <a href="${a.url}" target="_blank" rel="noopener" style="font-family:var(--heading);font-size:1.02rem;color:var(--forest);line-height:1.3;text-decoration:none;display:block;margin-bottom:6px">${a.title}</a>
+        ${a.excerpt?`<p style="font-size:.82rem;color:#6B7280;line-height:1.5">${a.excerpt}</p>`:''}
+      </div>
+      <button onclick="removeArticle(${a.id})" title="Remove" style="background:none;border:none;color:#D1D5DB;cursor:pointer;font-size:1.1rem;align-self:flex-start;padding:4px;line-height:1;flex-shrink:0">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function addArticle() {
+  const t = document.getElementById('a-title').value.trim();
+  const u = document.getElementById('a-url').value.trim();
+  if (!t || !u) return;
+  const art = { id: Date.now(), title: t, source: document.getElementById('a-source').value, date: document.getElementById('a-date').value, tag: document.getElementById('a-tag').value, url: u, excerpt: document.getElementById('a-excerpt').value };
+  articles.unshift(art);
+  saveArticle(art);
+  ['a-title','a-source','a-date','a-url','a-excerpt'].forEach(id => document.getElementById(id).value = '');
+  renderArticlesList(); renderCarousel();
+}
+
+function removeArticle(id) {
+  articles = articles.filter(a => a.id !== id);
+  renderArticlesList(); renderCarousel();
+}
+
+// ═══════════════════════════════════════════════
+// POSTAL CODE LOOKUP & LETTER
+// ═══════════════════════════════════════════════
+function onPostalInput(el) {
+  let v = el.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+  if (v.length > 3) v = v.slice(0,3) + ' ' + v.slice(3);
+  el.value = v;
+  // Auto-lookup when 6+ chars entered
+  if (v.replace(/\s/g,'').length >= 6) lookupPostalCode();
+}
+
+function showPostalStatus(html, type) {
+  const el = document.getElementById('l-postal-status');
+  el.style.display = 'block';
+  const colors = { loading: '#6B7280', success: '#059669', error: '#B91C1C' };
+  el.innerHTML = `<div style="font-size:.82rem;color:${colors[type]||'#6B7280'};line-height:1.5;display:flex;align-items:center;gap:8px">${html}</div>`;
+}
+
+function lookupPostalCode() {
+  const raw = document.getElementById('l-postal').value.replace(/\s/g, '').toUpperCase();
+  if (raw.length < 6) { showPostalStatus('Please enter a full postal code (e.g. V5K 0A1).', 'error'); return; }
+  if (!/^[A-Z]\d[A-Z]\d[A-Z]\d$/.test(raw)) { showPostalStatus('Invalid postal code format. Use format like V5K 0A1.', 'error'); return; }
+
+  showPostalStatus('<span style="display:inline-block;width:16px;height:16px;border:2px solid #6B7280;border-top-color:transparent;border-radius:50%;animation:spin .6s linear infinite"></span> Looking up your riding...', 'loading');
+  document.getElementById('l-lookup-btn').disabled = true;
+
+  // Add spinner animation
+  if (!document.getElementById('spin-style')) {
+    const s = document.createElement('style');
+    s.id = 'spin-style';
+    s.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+
+  fetch(`https://represent.opennorth.ca/postcodes/${raw}/?format=json`)
+    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+    .then(data => {
+      document.getElementById('l-lookup-btn').disabled = false;
+      // Find BC provincial riding from boundaries_centroid or boundaries_concordance
+      let ridingName = null;
+      const bcSet = 'british-columbia-electoral-districts';
+      const allBoundaries = [...(data.boundaries_centroid || []), ...(data.boundaries_concordance || [])];
+      for (const b of allBoundaries) {
+        if (b.boundary_set_name && b.boundary_set_name.toLowerCase().includes('british columbia electoral district')) {
+          ridingName = b.name; break;
+        }
+        if (b.url && b.url.includes(bcSet)) {
+          ridingName = b.name; break;
+        }
+      }
+      if (!ridingName) {
+        // Fallback: check if province is BC and try harder
+        if (data.province && data.province !== 'BC') {
+          showPostalStatus('This postal code is outside British Columbia. Please enter a B.C. postal code.', 'error');
+        } else {
+          showPostalStatus('Could not determine the riding for this postal code. Try a nearby postal code or <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">search manually</button>.', 'error');
+        }
+        return;
+      }
+
+      // Match riding to our MLA list (fuzzy match on name)
+      const normalize = s => s.toLowerCase().replace(/[^a-z]/g, '');
+      const ridingNorm = normalize(ridingName);
+      let matched = BC_MLAS.find(m => normalize(m.r) === ridingNorm);
+      if (!matched) matched = BC_MLAS.find(m => ridingNorm.includes(normalize(m.r)) || normalize(m.r).includes(ridingNorm));
+      if (!matched) {
+        // Try partial word matching
+        const words = ridingName.toLowerCase().split(/[\s\-]+/).filter(w => w.length > 3);
+        matched = BC_MLAS.find(m => { const mr = m.r.toLowerCase(); return words.some(w => mr.includes(w)); });
+      }
+
+      if (matched) {
+        selectedMLA = matched;
+        const city = data.city || '';
+        if (city && !document.getElementById('l-city').value) document.getElementById('l-city').value = city;
+        showPostalStatus(`<span style="color:#059669;font-weight:800;font-size:1.1rem">✓</span> Found your riding: <strong>${matched.r}</strong>`, 'success');
+        showMLACard(matched);
+      } else {
+        showPostalStatus(`Found riding "${ridingName}" but could not match it to an MLA in our database. <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">Search manually</button>`, 'error');
+      }
+    })
+    .catch(err => {
+      document.getElementById('l-lookup-btn').disabled = false;
+      showPostalStatus('Could not look up this postal code. Check your connection or <button style="background:none;border:none;color:var(--forest-light);font-weight:700;cursor:pointer;text-decoration:underline;font-family:var(--body);font-size:.82rem" onclick="showManualFallback()">search manually</button>.', 'error');
+    });
+}
+
+function showMLACard(m) {
+  const el = document.getElementById('mla-selected');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div style="background:var(--mint);border-radius:10px;padding:14px 16px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:800;color:var(--forest);font-size:.92rem">${m.n}</div>
+          <div style="font-size:.78rem;color:var(--forest-mid);margin-top:2px">MLA for ${m.r} · BC ${m.p}</div>
+          <div style="font-size:.74rem;color:#6B7280;margin-top:4px">${m.e}</div>
+        </div>
+        <span style="font-size:1.6rem">✉</span>
+      </div>
+    </div>
+    <div style="background:#F0F4F0;border-radius:10px;padding:12px 16px;display:flex;gap:10px;align-items:flex-start">
+      <svg style="flex-shrink:0;margin-top:2px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#40916C" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <div style="font-size:.78rem;color:#374151;line-height:1.5">
+        Your letter will also be CC'd to <strong>Premier David Eby</strong> and <strong>Finance Minister Brenda Bailey</strong> automatically.
+      </div>
+    </div>
+  `;
+}
+
+function showManualFallback() {
+  const el = document.getElementById('l-postal-status');
+  el.innerHTML = `
+    <div style="margin-top:4px">
+      <input id="l-manual-search" class="input" placeholder="Type riding name or MLA name..." oninput="filterManualMLAs()" style="font-size:.88rem;margin-bottom:8px">
+      <div id="l-manual-list" style="max-height:180px;overflow-y:auto;border-radius:10px;border:1px solid #E5E7EB"></div>
+    </div>
+  `;
+  filterManualMLAs();
+}
+
+function filterManualMLAs() {
+  const q = (document.getElementById('l-manual-search')?.value || '').toLowerCase();
+  const list = document.getElementById('l-manual-list');
+  const filtered = BC_MLAS.filter(m => m.r.toLowerCase().includes(q) || m.n.toLowerCase().includes(q));
+  list.innerHTML = filtered.slice(0, 20).map((m, i) => `
+    <button onclick="selectManualMLA(${BC_MLAS.indexOf(m)})" style="display:flex;justify-content:space-between;align-items:center;width:100%;padding:9px 12px;border:none;border-bottom:${i<Math.min(filtered.length,20)-1?'1px solid #F3F4F6':'none'};background:${selectedMLA&&selectedMLA.r===m.r?'var(--mint)':'#fff'};cursor:pointer;font-family:var(--body);text-align:left">
+      <div><div style="font-weight:700;color:var(--forest);font-size:.84rem">${m.r}</div><div style="font-size:.74rem;color:#6B7280">${m.n} · BC ${m.p}</div></div>
+      ${selectedMLA&&selectedMLA.r===m.r?'<span style="color:var(--forest-light);font-weight:800">✓</span>':''}
+    </button>
+  `).join('');
+}
+
+function selectManualMLA(idx) {
+  selectedMLA = BC_MLAS[idx];
+  showPostalStatus(`<span style="color:#059669;font-weight:800;font-size:1.1rem">✓</span> Selected: <strong>${selectedMLA.r}</strong>`, 'success');
+  showMLACard(selectedMLA);
+}
+
+function resetLetter() { document.getElementById('l-letter').value = DEFAULT_LETTER; }
+
+function getFilledLetter() {
+  const m = selectedMLA || { n:'[MLA Name]', r:'[Your Riding]' };
+  const name = document.getElementById('l-name').value || '[Your Name]';
+  const city = document.getElementById('l-city').value || '[Your City]';
+  return document.getElementById('l-letter').value.replace(/\[MLA_NAME\]/g, m.n).replace(/\[RIDING\]/g, m.r).replace(/\[YOUR_NAME\]/g, name).replace(/\[YOUR_CITY\]/g, city);
+}
+
+function sendLetter() {
+  if (!selectedMLA || !document.getElementById('l-name').value.trim()) {
+    document.getElementById('l-error').style.display = 'block';
+    document.getElementById('l-error').textContent = !selectedMLA ? 'Enter your postal code above to find your MLA.' : 'Please enter your name.';
+    return;
+  }
+  // Always CC Premier and Finance Minister
+  const to = [selectedMLA.e, 'Premier@gov.bc.ca', 'FIN.Minister@gov.bc.ca'];
+  window.open(`mailto:${to.join(',')}?subject=${encodeURIComponent('Scrap the PST Expansion on Professional Services — Budget 2026')}&body=${encodeURIComponent(getFilledLetter())}`, '_blank');
+  letterCount++; sentLetter = true;
+  saveLetterLog({ mla: selectedMLA.n, riding: selectedMLA.r, sent_at: new Date().toISOString() });
+  go('done');
+}
+
+function copyLetter() {
+  navigator.clipboard.writeText(getFilledLetter());
+  event.target.textContent = '✓ Copied!';
+  setTimeout(() => event.target.textContent = '📋 Copy', 2500);
+}
+
+// ═══════════════════════════════════════════════
+// PETITION
+// ═══════════════════════════════════════════════
+function submitPetition() {
+  const name = document.getElementById('s-name').value.trim();
+  const email = document.getElementById('s-email').value.trim();
+  const city = document.getElementById('s-city').value.trim();
+  const agreed = document.getElementById('s-agree').checked;
+  document.querySelectorAll('#page-sign .input').forEach(i => i.classList.remove('input-error'));
+  if (!name) document.getElementById('s-name').classList.add('input-error');
+  if (!email || !/\S+@\S+\.\S+/.test(email)) document.getElementById('s-email').classList.add('input-error');
+  if (!city) document.getElementById('s-city').classList.add('input-error');
+  if (!name || !email || !/\S+@\S+\.\S+/.test(email) || !city) {
+    document.getElementById('s-error').textContent = 'Please fill in all required fields.';
+    document.getElementById('s-error').style.display = 'block'; return;
+  }
+  if (!agreed) {
+    document.getElementById('s-error').textContent = 'Please check the agreement box.';
+    document.getElementById('s-error').style.display = 'block'; return;
+  }
+  document.getElementById('s-error').style.display = 'none';
+  sigCount++;
+  // Pre-fill letter page
+  document.getElementById('l-name').value = name;
+  document.getElementById('l-city').value = city;
+  savePetition({ name, email, city, org: document.getElementById('s-org').value, role: document.getElementById('s-role').value, signed_at: new Date().toISOString() });
+  go('done');
+}
+
+// ═══════════════════════════════════════════════
+// DONE / THANK YOU
+// ═══════════════════════════════════════════════
+function renderDone() {
+  makeShareButtons('done-share');
+  const checks = [
+    { done: true, t: 'Signed the petition' },
+    { done: sentLetter, t: 'Sent a letter to your MLA' },
+    { done: false, t: 'Share this tool with your network' },
+    { done: false, t: 'Follow the campaign and speak out' },
+  ];
+  document.getElementById('done-checklist').innerHTML = checks.map((x,i) => `
+    <div style="display:flex;gap:10px;align-items:center;padding:9px 0;${i<3?'border-bottom:1px solid #F3F4F6':''}">
+      <span style="color:${x.done?'var(--forest-light)':'#D1D5DB'};font-weight:800">${x.done?'✓':'○'}</span>
+      <span style="color:${x.done?'#1a1a1a':'#6B7280'};font-size:.88rem;font-weight:${x.done?600:400}">${x.t}</span>
+    </div>
+  `).join('');
+  document.getElementById('done-letter-btn').style.display = sentLetter ? 'none' : '';
+}
+
+// ═══════════════════════════════════════════════
+// SHAREABLE GRAPHICS (Canvas-generated)
+// ═══════════════════════════════════════════════
+function renderGraphics() {
+  const graphics = [
+    { bg:'#1B4332', accent:'#D4A843', headline:'7% PST on\nProfessional Services', sub:'Budget 2026 makes B.C. the least\ncompetitive province in Canada.', cta:'Sign the petition → ScrapThePSTGrab.ca' },
+    { bg:'#0F2B1F', accent:'#B91C1C', headline:'$7,000 / year', sub:'Estimated compliance cost per employee\nfor businesses newly registering for PST.', cta:'Tell your MLA → ScrapThePSTGrab.ca' },
+    { bg:'#1B4332', accent:'#D97706', headline:'Alberta: 0% PST\nB.C.: 7% PST', sub:'On the same professional services.\nHow is this competitive?', cta:'Take action → ScrapThePSTGrab.ca' },
+    { bg:'#2D6A4F', accent:'#7C3AED', headline:'$80 Billion\nin New Debt', sub:'Budget 2026 adds $4B in taxes\nand still projects a $13.3B deficit.', cta:'Demand better → ScrapThePSTGrab.ca' },
+  ];
+
+  const grid = document.getElementById('graphics-grid');
+  grid.innerHTML = '';
+
+  graphics.forEach((g, i) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 1200; canvas.height = 630;
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    ctx.fillStyle = g.bg; ctx.fillRect(0, 0, 1200, 630);
+
+    // Dot pattern
+    ctx.fillStyle = 'rgba(255,255,255,.03)';
+    for (let x = 0; x < 1200; x += 24) for (let y = 0; y < 630; y += 24) { ctx.beginPath(); ctx.arc(x, y, 1, 0, Math.PI*2); ctx.fill(); }
+
+    // Accent bar
+    ctx.fillStyle = g.accent; ctx.fillRect(0, 0, 8, 630);
+
+    // Badge
+    ctx.fillStyle = 'rgba(255,255,255,.1)';
+    ctx.beginPath(); ctx.roundRect(60, 50, 280, 32, 16); ctx.fill();
+    ctx.fillStyle = '#D8F3DC'; ctx.font = '700 13px sans-serif'; ctx.letterSpacing = '2px';
+    ctx.fillText('BUDGET 2026 — TAKE ACTION', 80, 72);
+
+    // Headline
+    ctx.fillStyle = '#fff'; ctx.font = '700 52px Georgia, serif';
+    const lines = g.headline.split('\n');
+    lines.forEach((line, li) => ctx.fillText(line, 60, 160 + li * 64));
+
+    // Sub
+    ctx.fillStyle = 'rgba(255,255,255,.7)'; ctx.font = '400 24px sans-serif';
+    const subLines = g.sub.split('\n');
+    subLines.forEach((line, li) => ctx.fillText(line, 60, 160 + lines.length * 64 + 30 + li * 34));
+
+    // CTA
+    ctx.fillStyle = g.accent; ctx.font = '700 20px sans-serif';
+    ctx.fillText(g.cta, 60, 570);
+
+    // Tree icon
+    ctx.strokeStyle = '#52B788'; ctx.lineWidth = 3; ctx.lineCap = 'round';
+    const tx = 1100, ty = 60;
+    ctx.beginPath(); ctx.moveTo(tx, ty+40); ctx.lineTo(tx, ty+20); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(tx, ty+20); ctx.bezierCurveTo(tx-15, ty, tx-20, ty-15, tx, ty-20); ctx.bezierCurveTo(tx+20, ty-15, tx+15, ty, tx, ty+20); ctx.stroke();
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'graphic-card';
+    wrapper.appendChild(canvas);
+
+    const dl = document.createElement('button');
+    dl.className = 'graphic-dl';
+    dl.textContent = '⬇ Download';
+    dl.onclick = () => {
+      const link = document.createElement('a');
+      link.download = `scrap-pst-graphic-${i+1}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    };
+    wrapper.appendChild(dl);
+    grid.appendChild(wrapper);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// SOCIAL POST TEMPLATES
+// ═══════════════════════════════════════════════
+function renderSocialPosts() {
+  document.getElementById('social-posts').innerHTML = SOCIAL_POSTS.map((p, i) => `
+    <div class="post-template">
+      <button class="post-template-copy" onclick="copyPost(${i})">Copy</button>
+      <div style="font-weight:700;color:var(--forest);margin-bottom:8px;font-size:.85rem">${p.icon} ${p.platform}</div>
+      <pre style="white-space:pre-wrap;font-family:var(--body);font-size:.82rem;color:#374151;line-height:1.55;margin:0">${p.text}</pre>
+    </div>
+  `).join('');
+}
+
+function copyPost(i) {
+  navigator.clipboard.writeText(SOCIAL_POSTS[i].text);
+  const btns = document.querySelectorAll('.post-template-copy');
+  btns[i].textContent = '✓ Copied!';
+  setTimeout(() => btns[i].textContent = 'Copy', 2000);
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderIssues();
+  renderFacts();
+  renderCarousel();
+  renderArticlesList();
+  renderGraphics();
+  renderSocialPosts();
+  makeShareButtons('home-share');
+  makeShareButtons('share-page-buttons');
+  document.getElementById('l-letter').value = DEFAULT_LETTER;
+});
+</script>
+</body>
+</html>
